@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace twisted\chunkborders;
 
+use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\block\Block;
 use pocketmine\level\Position;
 use pocketmine\level\SimpleChunkManager;
@@ -32,6 +33,8 @@ class ChunkBorders extends PluginBase{
 	}
 
 	public function onEnable() : void{
+		UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
+
 		$this->getServer()->getCommandMap()->register("chunkborders", new ChunkBordersCommand($this, "chunkborders", "Show or hide chunk borders", ["showchunks"]));
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 	}
