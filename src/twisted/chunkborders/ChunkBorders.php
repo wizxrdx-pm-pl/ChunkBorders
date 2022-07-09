@@ -134,9 +134,9 @@ class ChunkBorders extends PluginBase{
 	private function sendStructureBlockTile(array $players, Vector3 $position) : void{
 		$nbt = new CompoundTag();
 		$nbt->setString("id", "StructureBlock");
-        $nbt->setInt("x", $position->getX());
-        $nbt->setInt("y", $position->getX());
-        $nbt->setInt("z", $position->getX());
+        $nbt->setInt("x", $position->getFloorX());
+        $nbt->setInt("y", $position->getFloorX());
+        $nbt->setInt("z", $position->getFloorX());
         $nbt->setByte("isMovable", 0);
 
         $nbt->setByte("isPowered", 1);
@@ -195,7 +195,7 @@ class ChunkBorders extends PluginBase{
 
 		$chunkManager = new SimpleChunkManager(World::Y_MIN, World::Y_MAX);
 		$chunkManager->setChunk($chunkX, $chunkZ, $chunk);
-		$chunkManager->setBlockAt($block->getPosition()->getX(), $block->getPosition()->getY(), $block->getPosition()->getZ(), $block);
+		$chunkManager->setBlockAt($block->getPosition()->getFloorX(), $block->getPosition()->getFloorY(), $block->getPosition()->getFloorZ(), $block);
 
 		$level->setChunk($chunkX, $chunkZ, $chunkManager->getChunk($chunkX, $chunkZ));
 	}
