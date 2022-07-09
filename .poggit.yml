@@ -6,8 +6,6 @@ projects:
   ChunkBorders:
     path: ""
     libs:
-      - src: JackMD/UpdateNotifier/UpdateNotifier
-        version: ^2.1.0
       - src: CortexPE/Commando/Commando
         version: ^2.1.1
     lint:
