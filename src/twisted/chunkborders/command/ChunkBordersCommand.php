@@ -15,6 +15,12 @@ class ChunkBordersCommand extends BaseCommand{
 		parent::__construct($plugin, $name, $description, $aliases);
 	}
 
+    /**
+     * @param CommandSender $sender
+     * @param string $aliasUsed
+     * @param string[] $args
+     * @return void
+     */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void{
 		if(!$sender instanceof Player){
 			$sender->sendMessage(TextFormat::RED . "Use command in game.");
