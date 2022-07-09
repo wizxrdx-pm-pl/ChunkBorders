@@ -3,6 +3,6 @@ description: Makes use of structure blocks to create chunk borders in PocketMine
 
 main: twisted\chunkborders\ChunkBorders
 version: 1.0.0
-api: 3.0.0
+api: 4.0.0
 
-author: Twisted
+author: Twisted, Wizxrdx

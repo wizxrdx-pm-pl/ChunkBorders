@@ -6,11 +6,11 @@ namespace twisted\chunkborders;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\scheduler\ClosureTask;
+use pocketmine\world\format\Chunk;
 
 class EventListener implements Listener{
 
-	/** @var ChunkBorders */
-	private $plugin;
+	private ChunkBorders $plugin;
 
 	public function __construct(ChunkBorders $plugin){
 		$this->plugin = $plugin;
@@ -28,10 +28,13 @@ class EventListener implements Listener{
 			return;
 		}
 
-		$fromPos = $player->getLevel()->getChunkAtPosition($event->getFrom());
-		$toPos = $player->getLevel()->getChunkAtPosition($event->getTo());
-		if($fromPos->getX() !== $toPos->getX() || $fromPos->getZ() !== $toPos->getZ()){
-			$this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function(int $currentTick) use ($player) : void{
+        $fromPosX = $event->getFrom()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $fromPosZ = $event->getFrom()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+        $toPosX = $event->getTo()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $toPosZ = $event->getTo()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+
+		if($fromPosX !== $toPosX || $fromPosZ !== $toPosZ){
+			$this->plugin->getScheduler()->scheduleDelayedTask(new ClosureTask(function() use ($player) : void{
 				$this->plugin->updateChunkBordersFor($player);
 			}), 1);
 		}
