@@ -5,7 +5,7 @@ namespace twisted\chunkborders\command;
 
 use CortexPE\Commando\BaseCommand;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use twisted\chunkborders\ChunkBorders;
 
@@ -22,7 +22,7 @@ class ChunkBordersCommand extends BaseCommand{
 			return;
 		}
 		/** @var ChunkBorders $plugin */
-		$plugin = $this->getPlugin();
+		$plugin = $this->getOwningPlugin();
 
 		$plugin->setViewingChunkBorders($sender, !$plugin->isViewingChunkBorders($sender));
 
