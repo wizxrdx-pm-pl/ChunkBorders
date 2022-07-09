@@ -197,6 +197,8 @@ class ChunkBorders extends PluginBase{
 		$chunkManager->setChunk($chunkX, $chunkZ, $chunk);
 		$chunkManager->setBlockAt($block->getPosition()->getFloorX(), $block->getPosition()->getFloorY(), $block->getPosition()->getFloorZ(), $block);
 
-		$level->setChunk($chunkX, $chunkZ, $chunkManager->getChunk($chunkX, $chunkZ));
+        if (($chunk = $chunkManager->getChunk($chunkX, $chunkZ)) !== null) {
+		    $level->setChunk($chunkX, $chunkZ, $chunk);
+        }
 	}
 }
