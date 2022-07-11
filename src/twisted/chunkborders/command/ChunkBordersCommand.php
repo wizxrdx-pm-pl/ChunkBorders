@@ -5,7 +5,7 @@ namespace twisted\chunkborders\command;
 
 use CortexPE\Commando\BaseCommand;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 use twisted\chunkborders\ChunkBorders;
 
@@ -15,6 +15,12 @@ class ChunkBordersCommand extends BaseCommand{
 		parent::__construct($plugin, $name, $description, $aliases);
 	}
 
+    /**
+     * @param CommandSender $sender
+     * @param string $aliasUsed
+     * @param string[] $args
+     * @return void
+     */
 	public function onRun(CommandSender $sender, string $aliasUsed, array $args) : void{
 		if(!$sender instanceof Player){
 			$sender->sendMessage(TextFormat::RED . "Use command in game.");
@@ -22,7 +28,7 @@ class ChunkBordersCommand extends BaseCommand{
 			return;
 		}
 		/** @var ChunkBorders $plugin */
-		$plugin = $this->getPlugin();
+		$plugin = $this->getOwningPlugin();
 
 		$plugin->setViewingChunkBorders($sender, !$plugin->isViewingChunkBorders($sender));
 
